@@ -7,18 +7,19 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useLayoutEffect, useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { useNavigation } from "@react-navigation/native";
 import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets";
 import MenuContainer from "../components/MenuContainer";
-import ItemCarDContainer from "../components/ItemCardContainer";
 
 import { FontAwesome } from "@expo/vector-icons";
-import { getPlacesData } from "../api";
+import ItemCarDContainer from "../components/ItemCardContainer";
+import { getPlacesData } from "../api/index";
 
 const Discover = () => {
   const navigation = useNavigation();
+
   const [type, setType] = useState("restaurants");
   const [isLoading, setIsLoading] = useState(false);
   const [mainData, setMainData] = useState([]);
@@ -31,7 +32,7 @@ const Discover = () => {
     navigation.setOptions({
       headerShown: false,
     });
-  }, [navigation]);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,11 +46,12 @@ const Discover = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-white relative">
-      <View className=" flex-row items-center justify-between px-8 py-8">
+      <View className="flex-row items-center justify-between px-8 py-8">
         <View>
           <Text className="text-[40px] text-[#0B646B] font-bold">Discover</Text>
           <Text className="text-[#527283] text-[36px]">the beauty today</Text>
         </View>
+
         <View className="w-12 h-12 bg-gray-400 rounded-md items-center justify-center shadow-lg">
           <Image
             source={Avatar}
@@ -72,11 +74,12 @@ const Discover = () => {
             setTr_lng(details?.geometry?.viewport?.northeast?.lng);
           }}
           query={{
-            key: "YOUR_API_KEY",
+            key: "AIzaSyABxyRixy_R818-03OIhhKb76SPFQb0xjA",
             language: "en",
           }}
         />
       </View>
+
       {/* Menu Container */}
       {isLoading ? (
         <View className=" flex-1 items-center justify-center">
@@ -109,6 +112,7 @@ const Discover = () => {
               setType={setType}
             />
           </View>
+
           <View>
             <View className="flex-row items-center justify-between px-4 mt-8">
               <Text className="text-[#2C7379] text-[28px] font-bold">
